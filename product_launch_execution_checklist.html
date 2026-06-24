@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>产品上线流程执行清单（简化版）</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8fb;
+      --paper: #ffffff;
+      --ink: #18202f;
+      --muted: #667085;
+      --line: #d8dee8;
+      --line-strong: #b9c3d2;
+      --accent: #0f766e;
+      --accent-soft: #e5f3f1;
+      --warn: #a15c12;
+      --warn-soft: #fff4df;
+      --code: #101828;
+      --code-bg: #eef2f6;
+      --shadow: 0 18px 50px rgba(24, 32, 47, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.72;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+
+    header {
+      padding: 36px 0 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 860px;
+      font-size: clamp(30px, 5vw, 50px);
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    .summary {
+      max-width: 860px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 32px;
+      align-items: start;
+      margin-top: 30px;
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    nav {
+      position: sticky;
+      top: 18px;
+      padding: 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    nav h2 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    nav ol {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.58;
+    }
+
+    nav li {
+      margin: 7px 0;
+    }
+
+    section {
+      margin: 0 0 24px;
+      padding: 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 24px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 28px 0 12px;
+      font-size: 19px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul,
+    ol {
+      margin: 0 0 18px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    table {
+      width: 100%;
+      margin: 16px 0 22px;
+      border-collapse: collapse;
+      overflow-wrap: anywhere;
+      font-size: 15px;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--accent-soft);
+      color: #0f3f3a;
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) td {
+      background: #fbfcfe;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: var(--code-bg);
+      color: var(--code);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 16px 0 22px;
+      padding: 18px;
+      overflow-x: auto;
+      background: #101828;
+      color: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.58;
+    }
+
+    pre code {
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 14px;
+    }
+
+    .callout {
+      margin: 16px 0 20px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .criteria {
+      margin-top: 18px;
+      padding: 16px 18px;
+      background: var(--warn-soft);
+      border: 1px solid #f2d7a7;
+      border-radius: 8px;
+    }
+
+    .criteria strong {
+      color: var(--warn);
+    }
+
+    .compact-list {
+      margin-bottom: 0;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 920px) {
+      .layout {
+        display: block;
+      }
+
+      nav {
+        position: static;
+        margin-bottom: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 22px 14px 40px;
+      }
+
+      header {
+        padding: 24px 0 22px;
+      }
+
+      section {
+        padding: 20px 16px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        max-width: none;
+        padding: 0;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      nav {
+        display: none;
+      }
+
+      section {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="eyebrow">Android 新产品上线前执行流程</p>
+      <h1>产品上线流程执行清单（简化版）</h1>
+      <p class="summary">适用范围：Android 新产品从后台创建、归因配置、广告变现最小单元、首版过审到启动投放。目标是先保证产品可提交首版审核；过审后再补齐完整广告与合规配置，最后启动买量。</p>
+    </header>
+
+    <div class="layout">
+      <main>
+        <section id="references">
+          <h2>0. 参考配置文档</h2>
+          <p>执行过程中可直接参考下午整理的配置文档：</p>
+          <table>
+            <thead>
+              <tr>
+                <th>平台 / 场景</th>
+                <th>参考文档</th>
+                <th>用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AppsFlyer - Fruit Mania</td>
+                <td><a href="appsflyer_fruit_mania_config.md">appsflyer_fruit_mania_config.md</a></td>
+                <td>参考 AppsFlyer 产品参数、事件、渠道配置</td>
+              </tr>
+              <tr>
+                <td>AppsFlyer - Cluck Carnival</td>
+                <td><a href="appsflyer_cluck_carnival_config.md">appsflyer_cluck_carnival_config.md</a></td>
+                <td>参考不同产品的 AppsFlyer 配置差异</td>
+              </tr>
+              <tr>
+                <td>AppsFlyer - Android 创建模板</td>
+                <td><a href="appsflyer_android_app_setup_template.md">appsflyer_android_app_setup_template.md</a></td>
+                <td>创建新 Android App 时直接照表执行</td>
+              </tr>
+              <tr>
+                <td>Adjust - Fruit Mania</td>
+                <td><a href="adjust_fruit_mania_config.md">adjust_fruit_mania_config.md</a></td>
+                <td>参考 Adjust 产品参数、events、partner-level data sharing、w2a 链接</td>
+              </tr>
+              <tr>
+                <td>MAX - FruitGarden</td>
+                <td><a href="max_fruitgarden_mediation_config.md">max_fruitgarden_mediation_config.md</a></td>
+                <td>参考 MAX 聚合广告位、waterfall、network、默认开关</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="product-info">
+          <h2>1. 准备产品信息</h2>
+          <p>上线前先确认以下基础信息：</p>
+          <table>
+            <thead>
+              <tr>
+                <th>信息项</th>
+                <th>说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>产品名称</td>
+                <td>用于 AdMob、Adjust / AppsFlyer、MAX、LevelPlay 等后台</td>
+              </tr>
+              <tr>
+                <td>Android 包名</td>
+                <td>Google Play package name</td>
+              </tr>
+              <tr>
+                <td>Google Play 开发者账号</td>
+                <td>确认提交主体</td>
+              </tr>
+              <tr>
+                <td>提现类型</td>
+                <td>真提现 / 假提现</td>
+              </tr>
+              <tr>
+                <td>应用图标、商店素材</td>
+                <td>用于各后台识别与商店提交</td>
+              </tr>
+              <tr>
+                <td>隐私政策 URL</td>
+                <td>用于商店、SDK 合规、GDPR</td>
+              </tr>
+              <tr>
+                <td>app-ads.txt 域名</td>
+                <td>用于 AdMob 审核和广告变现</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="admob">
+          <h2>2. 创建 AdMob 产品</h2>
+          <ol>
+            <li>在 AdMob 创建新 App。</li>
+            <li>平台选择 Android。</li>
+            <li>填写产品名称和包名。</li>
+            <li>记录 AdMob App ID。</li>
+            <li>暂不强依赖完整广告位配置，先保证产品实体存在。</li>
+          </ol>
+          <div class="criteria">
+            <strong>完成标准：</strong>
+            <ul class="compact-list">
+              <li>AdMob 中已存在该产品；</li>
+              <li>App ID 已同步给客户端或配置表；</li>
+              <li>app-ads.txt 域名已准备好。</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="attribution">
+          <h2>3. 配置归因平台</h2>
+          <p>根据提现类型选择归因平台：</p>
+          <table>
+            <thead>
+              <tr>
+                <th>提现类型</th>
+                <th>归因平台</th>
+                <th>执行动作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>真提现</td>
+                <td>Adjust</td>
+                <td>创建 Android App，配置事件、渠道、链接、必要 partner data sharing</td>
+              </tr>
+              <tr>
+                <td>假提现</td>
+                <td>AppsFlyer</td>
+                <td>创建 Android App，配置事件、渠道、OneLink / 链接模板</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>真提现：Adjust</h3>
+          <p>参考：<a href="adjust_fruit_mania_config.md">adjust_fruit_mania_config.md</a></p>
+          <ol>
+            <li>创建 Adjust Android App。</li>
+            <li>配置包名、币种、基础归因窗口。</li>
+            <li>配置核心 events。</li>
+            <li>配置渠道链接和必要 partner-level data sharing。</li>
+            <li>记录 App Token、Event Token、关键 link token。</li>
+          </ol>
+
+          <h3>假提现：AppsFlyer</h3>
+          <p>参考：</p>
+          <ul>
+            <li><a href="appsflyer_android_app_setup_template.md">appsflyer_android_app_setup_template.md</a></li>
+            <li><a href="appsflyer_fruit_mania_config.md">appsflyer_fruit_mania_config.md</a></li>
+            <li><a href="appsflyer_cluck_carnival_config.md">appsflyer_cluck_carnival_config.md</a></li>
+          </ul>
+          <ol>
+            <li>创建 AppsFlyer Android App。</li>
+            <li>配置包名、时区、币种等基础参数。</li>
+            <li>配置 in-app events。</li>
+            <li>配置渠道模板、OneLink 或自定义链接。</li>
+            <li>配置渠道 postback：
+              <ul>
+                <li><code>ads_revenue</code>：All media sources, including organic；Values &amp; revenue。</li>
+                <li><code>af_app_opened</code>：All media sources, including organic；Values &amp; no revenue。</li>
+              </ul>
+            </li>
+            <li>配置 Mintegral / MTG Cost：
+              <ul>
+                <li>Partner Integrations &gt; Mintegral &gt; Cost 创建 cost integration。</li>
+                <li>选择当前 App，Test integration 通过后保存。</li>
+                <li>新建后可能先显示 <code>Waiting for sync</code> / <code>Never</code>，后续到 Cost &amp; Ad Revenue Status 复查。</li>
+              </ul>
+            </li>
+            <li>记录 Dev Key、App ID、事件名、关键链接参数。</li>
+          </ol>
+          <div class="criteria">
+            <strong>完成标准：</strong>
+            <ul class="compact-list">
+              <li>客户端可拿到归因初始化参数；</li>
+              <li>核心事件命名和 token / event name 已确认；</li>
+              <li>渠道链接或模板已能用于测试。</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="monetization">
+          <h2>4. 创建广告变现最小单元</h2>
+          <p>目标：首版提审前只创建能支撑 SDK 初始化和基础广告验证的最小配置，不一次性铺满全部广告策略。</p>
+
+          <h3>MAX</h3>
+          <p>参考：<a href="max_fruitgarden_mediation_config.md">max_fruitgarden_mediation_config.md</a></p>
+          <ol>
+            <li>创建 MAX App。</li>
+            <li>创建最小广告位：
+              <ul>
+                <li>Interstitial；</li>
+                <li>Rewarded。</li>
+              </ul>
+            </li>
+            <li>真提现产品如需 Prebid，创建对应 Prebid 组或 Prebid 广告位。</li>
+            <li>假提现产品 MAX 不创建 Prebid 组。</li>
+            <li>记录 MAX SDK Key、Ad Unit ID。</li>
+          </ol>
+
+          <h3>LevelPlay</h3>
+          <ol>
+            <li>创建 LevelPlay App。</li>
+            <li>创建最小广告位：
+              <ul>
+                <li>Interstitial；</li>
+                <li>Rewarded。</li>
+              </ul>
+            </li>
+            <li>接入最基础 waterfall / bidding 配置。</li>
+            <li>记录 App Key、Instance / Placement 信息。</li>
+          </ol>
+          <div class="criteria">
+            <strong>完成标准：</strong>
+            <ul class="compact-list">
+              <li>MAX 和 LevelPlay 至少有 inter / reward 最小广告单元；</li>
+              <li>假提现产品 MAX 未配置 Prebid 组；</li>
+              <li>客户端可完成广告 SDK 初始化和测试广告请求。</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="first-review">
+          <h2>5. 提交产品第一版审核</h2>
+          <p>提交首版前确认：</p>
+          <table>
+            <thead>
+              <tr>
+                <th>检查项</th>
+                <th>状态</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>包名与各后台一致</td>
+                <td>待确认</td>
+              </tr>
+              <tr>
+                <td>归因 SDK 初始化参数已配置</td>
+                <td>待确认</td>
+              </tr>
+              <tr>
+                <td>广告 SDK 最小单元已配置</td>
+                <td>待确认</td>
+              </tr>
+              <tr>
+                <td>隐私政策 URL 可访问</td>
+                <td>待确认</td>
+              </tr>
+              <tr>
+                <td>商店素材完整</td>
+                <td>待确认</td>
+              </tr>
+              <tr>
+                <td>测试设备 / 测试模式已关闭或符合审核要求</td>
+                <td>待确认</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="criteria">
+            <strong>完成标准：</strong>
+            <ul class="compact-list">
+              <li>Google Play 第一版已提交审核；</li>
+              <li>审核期间不大改后台关键配置，避免包内参数与后台不一致。</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="after-review">
+          <h2>6. 第一版过审后补齐配置</h2>
+          <p>产品第一版过审后，再补齐完整广告与合规配置。</p>
+
+          <h3>补齐广告配置</h3>
+          <ol>
+            <li>在 MAX 配置剩余广告位、waterfall、bidding network、国家/分组策略；参考 <a href="max_fruitgarden_mediation_config.md">max_fruitgarden_mediation_config.md</a>。</li>
+            <li>在 LevelPlay 配置剩余广告位、instances、waterfall、bidding network。</li>
+            <li>配置 AdMob 正式广告单元。</li>
+            <li>核对各广告平台的 app / package / ad unit 是否对应同一产品。</li>
+            <li>使用测试设备验证广告加载、展示、激励回调。</li>
+          </ol>
+
+          <h3>配置 GDPR</h3>
+          <ol>
+            <li>配置 CMP / GDPR 弹窗策略。</li>
+            <li>确认 EEA / UK 用户 consent 流程。</li>
+            <li>确认广告 SDK consent 透传。</li>
+            <li>确认归因 SDK 隐私相关开关；Adjust 参考 <a href="adjust_fruit_mania_config.md">adjust_fruit_mania_config.md</a>，AppsFlyer 参考 <a href="appsflyer_android_app_setup_template.md">appsflyer_android_app_setup_template.md</a>。</li>
+          </ol>
+          <div class="criteria">
+            <strong>完成标准：</strong>
+            <ul class="compact-list">
+              <li>广告配置已从最小单元扩展为正式投放配置；</li>
+              <li>GDPR 配置已完成并通过测试；</li>
+              <li>激励广告回调、收入上报、归因事件链路正常。</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="app-ads">
+          <h2>7. 触发 AdMob app-ads.txt 审核</h2>
+          <ol>
+            <li>确认 app-ads.txt 已部署到指定域名。</li>
+            <li>确认文件中包含 AdMob 要求的 publisher 记录。</li>
+            <li>在 AdMob 中手动触发 app-ads.txt 审核。</li>
+            <li>等待 AdMob 审核通过。</li>
+          </ol>
+          <div class="criteria">
+            <strong>完成标准：</strong>
+            <ul class="compact-list">
+              <li>AdMob app-ads.txt 状态通过；</li>
+              <li>广告请求不再因 app-ads.txt 问题受限。</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="launch">
+          <h2>8. 启动投放</h2>
+          <p>启动投放前最后确认：</p>
+          <table>
+            <thead>
+              <tr>
+                <th>模块</th>
+                <th>必须满足</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>商店状态</td>
+                <td>第一版已过审并上线</td>
+              </tr>
+              <tr>
+                <td>归因</td>
+                <td>Adjust / AppsFlyer 链路测试通过</td>
+              </tr>
+              <tr>
+                <td>广告</td>
+                <td>MAX、LevelPlay、AdMob 正式配置可用</td>
+              </tr>
+              <tr>
+                <td>GDPR</td>
+                <td>弹窗和 consent 透传已验证</td>
+              </tr>
+              <tr>
+                <td>app-ads.txt</td>
+                <td>AdMob 审核通过</td>
+              </tr>
+              <tr>
+                <td>事件</td>
+                <td>安装、打开、注册、关键转化事件可见</td>
+              </tr>
+              <tr>
+                <td>数据</td>
+                <td>广告收入、归因、事件数据能在后台看到</td>
+              </tr>
+              <tr>
+                <td>AppsFlyer 渠道 postback</td>
+                <td><code>ads_revenue</code> 为 Values &amp; revenue；<code>af_app_opened</code> 为 Values &amp; no revenue</td>
+              </tr>
+              <tr>
+                <td>AppsFlyer Cost</td>
+                <td>Mintegral / MTG cost integration 已创建并测试通过；同步完成后无 warning / action required</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>全部通过后，启动买量投放。</p>
+        </section>
+
+        <section id="overview">
+          <h2>9. 总流程速览</h2>
+          <pre><code>准备产品信息
+  -&gt; 创建 AdMob 产品
+  -&gt; 按提现类型配置归因
+     -&gt; 真提现：Adjust
+     -&gt; 假提现：AppsFlyer
+  -&gt; 创建 MAX / LevelPlay 广告变现最小单元
+     -&gt; 假提现 MAX 不配 Prebid 组
+  -&gt; 提交第一版审核
+  -&gt; 第一版过审
+  -&gt; 补齐剩余广告配置
+  -&gt; 配置 GDPR
+  -&gt; 手动触发 AdMob app-ads.txt 审核
+  -&gt; app-ads.txt 审核通过
+  -&gt; 启动投放</code></pre>
+        </section>
+
+        <section id="rules">
+          <h2>10. 简化执行口径</h2>
+          <ul class="compact-list">
+            <li>首版审核前：只做“产品实体 + 归因基础 + 广告最小单元”。</li>
+            <li>首版过审后：再补齐“完整广告策略 + GDPR + app-ads.txt 审核”。</li>
+            <li>启动投放前：必须确认商店、归因、广告、GDPR、app-ads.txt、事件数据全部闭环。</li>
+          </ul>
+        </section>
+      </main>
+
+      <nav aria-label="目录">
+        <h2>目录</h2>
+        <ol>
+          <li><a href="#references">参考配置文档</a></li>
+          <li><a href="#product-info">准备产品信息</a></li>
+          <li><a href="#admob">创建 AdMob 产品</a></li>
+          <li><a href="#attribution">配置归因平台</a></li>
+          <li><a href="#monetization">创建广告变现最小单元</a></li>
+          <li><a href="#first-review">提交产品第一版审核</a></li>
+          <li><a href="#after-review">过审后补齐配置</a></li>
+          <li><a href="#app-ads">触发 app-ads.txt 审核</a></li>
+          <li><a href="#launch">启动投放</a></li>
+          <li><a href="#overview">总流程速览</a></li>
+          <li><a href="#rules">简化执行口径</a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <footer>由 product_launch_execution_checklist.md 转换生成。</footer>
+  </div>
+</body>
+</html>
