@@ -442,6 +442,7 @@
 
           <h3>真提现：Adjust</h3>
           <p>参考：<a href="adjust_fruit_mania_config.md">adjust_fruit_mania_config.md</a></p>
+          <p>执行时可直接使用 Adjust 对应 skill 辅助完成 App 创建、事件、链接和参数配置。</p>
           <ol>
             <li>创建 Adjust Android App。</li>
             <li>配置包名、币种、基础归因窗口。</li>
@@ -457,6 +458,7 @@
             <li><a href="appsflyer_fruit_mania_config.md">appsflyer_fruit_mania_config.md</a></li>
             <li><a href="appsflyer_cluck_carnival_config.md">appsflyer_cluck_carnival_config.md</a></li>
           </ul>
+          <p>执行时可直接使用 AppsFlyer 对应 skill 辅助完成 App 创建、事件、渠道模板、postback 和 cost 配置。</p>
           <ol>
             <li>创建 AppsFlyer Android App。</li>
             <li>配置包名、时区、币种等基础参数。</li>
@@ -528,8 +530,54 @@
           </div>
         </section>
 
+        <section id="config-sheet">
+          <h2>5. 填写上线配置表</h2>
+          <p>提交第一版审核前，需要把客户端初始化和广告请求所需的关键参数填入上线配置表。</p>
+          <p>表格地址：<a href="https://shimo.im/sheets/gXqmdQ7yLVfg8Q3o/SKquJ">https://shimo.im/sheets/gXqmdQ7yLVfg8Q3o/SKquJ</a></p>
+          <p>其中 AF / AD Key 建议直接基于 AppsFlyer 或 Adjust 对应 skill 已完成的配置结果回填，减少手工抄错。</p>
+          <p>必填信息：</p>
+          <table>
+            <thead>
+              <tr>
+                <th>配置项</th>
+                <th>说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AF / AD Key</td>
+                <td>按提现类型填写 AppsFlyer Dev Key 或 Adjust App Token / Event Token 等归因参数</td>
+              </tr>
+              <tr>
+                <td>AppLovin SDK Key</td>
+                <td>用于 MAX / AppLovin SDK 初始化</td>
+              </tr>
+              <tr>
+                <td>AdMob App ID</td>
+                <td>AdMob 后台创建 App 后获取</td>
+              </tr>
+              <tr>
+                <td>LevelPlay 广告 ID</td>
+                <td>填写 LevelPlay App Key、Placement / Instance 等广告位参数</td>
+              </tr>
+              <tr>
+                <td>MAX 广告 ID</td>
+                <td>填写 MAX SDK Key、Ad Unit ID 等广告位参数</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="criteria">
+            <strong>完成标准：</strong>
+            <ul class="compact-list">
+              <li>上线配置表已填写当前产品对应参数；</li>
+              <li>表内 AF / AD、AppLovin、AdMob、LevelPlay、MAX 参数与各后台一致；</li>
+              <li>客户端或配置负责人已确认可按表接入。</li>
+            </ul>
+          </div>
+        </section>
+
         <section id="first-review">
-          <h2>5. 提交产品第一版审核</h2>
+          <h2>6. 提交产品第一版审核</h2>
           <p>提交首版前确认：</p>
           <table>
             <thead>
@@ -549,6 +597,10 @@
               </tr>
               <tr>
                 <td>广告 SDK 最小单元已配置</td>
+                <td>待确认</td>
+              </tr>
+              <tr>
+                <td>上线配置表已填写并确认</td>
                 <td>待确认</td>
               </tr>
               <tr>
@@ -575,7 +627,7 @@
         </section>
 
         <section id="after-review">
-          <h2>6. 第一版过审后补齐配置</h2>
+          <h2>7. 第一版过审后补齐配置</h2>
           <p>产品第一版过审后，再补齐完整广告与合规配置。</p>
 
           <h3>补齐广告配置</h3>
@@ -605,7 +657,7 @@
         </section>
 
         <section id="app-ads">
-          <h2>7. 触发 AdMob app-ads.txt 审核</h2>
+          <h2>8. 触发 AdMob app-ads.txt 审核</h2>
           <ol>
             <li>确认 app-ads.txt 已部署到指定域名。</li>
             <li>确认文件中包含 AdMob 要求的 publisher 记录。</li>
@@ -622,7 +674,7 @@
         </section>
 
         <section id="launch">
-          <h2>8. 启动投放</h2>
+          <h2>9. 启动投放</h2>
           <p>启动投放前最后确认：</p>
           <table>
             <thead>
@@ -674,7 +726,7 @@
         </section>
 
         <section id="overview">
-          <h2>9. 总流程速览</h2>
+          <h2>10. 总流程速览</h2>
           <pre><code>准备产品信息
   -&gt; 创建 AdMob 产品
   -&gt; 按提现类型配置归因
@@ -682,6 +734,8 @@
      -&gt; 假提现：AppsFlyer
   -&gt; 创建 MAX / LevelPlay 广告变现最小单元
      -&gt; 假提现 MAX 不配 Prebid 组
+  -&gt; 填写上线配置表
+     -&gt; AF / AD Key、AppLovin SDK Key、AdMob App ID、LevelPlay / MAX 广告 ID
   -&gt; 提交第一版审核
   -&gt; 第一版过审
   -&gt; 补齐剩余广告配置
@@ -692,9 +746,9 @@
         </section>
 
         <section id="rules">
-          <h2>10. 简化执行口径</h2>
+          <h2>11. 简化执行口径</h2>
           <ul class="compact-list">
-            <li>首版审核前：只做“产品实体 + 归因基础 + 广告最小单元”。</li>
+            <li>首版审核前：只做“产品实体 + 归因基础 + 广告最小单元 + 上线配置表”。</li>
             <li>首版过审后：再补齐“完整广告策略 + GDPR + app-ads.txt 审核”。</li>
             <li>启动投放前：必须确认商店、归因、广告、GDPR、app-ads.txt、事件数据全部闭环。</li>
           </ul>
@@ -709,6 +763,7 @@
           <li><a href="#admob">创建 AdMob 产品</a></li>
           <li><a href="#attribution">配置归因平台</a></li>
           <li><a href="#monetization">创建广告变现最小单元</a></li>
+          <li><a href="#config-sheet">填写上线配置表</a></li>
           <li><a href="#first-review">提交产品第一版审核</a></li>
           <li><a href="#after-review">过审后补齐配置</a></li>
           <li><a href="#app-ads">触发 app-ads.txt 审核</a></li>

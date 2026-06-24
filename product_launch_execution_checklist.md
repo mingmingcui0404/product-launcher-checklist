@@ -56,6 +56,8 @@
 
 参考：[adjust_fruit_mania_config.md](adjust_fruit_mania_config.md)
 
+执行时可直接使用 Adjust 对应 skill 辅助完成 App 创建、事件、链接和参数配置。
+
 1. 创建 Adjust Android App。
 2. 配置包名、币种、基础归因窗口。
 3. 配置核心 events。
@@ -69,6 +71,8 @@
 - [appsflyer_android_app_setup_template.md](appsflyer_android_app_setup_template.md)
 - [appsflyer_fruit_mania_config.md](appsflyer_fruit_mania_config.md)
 - [appsflyer_cluck_carnival_config.md](appsflyer_cluck_carnival_config.md)
+
+执行时可直接使用 AppsFlyer 对应 skill 辅助完成 App 创建、事件、渠道模板、postback 和 cost 配置。
 
 1. 创建 AppsFlyer Android App。
 2. 配置包名、时区、币种等基础参数。
@@ -120,7 +124,31 @@
 - 假提现产品 MAX 未配置 Prebid 组；
 - 客户端可完成广告 SDK 初始化和测试广告请求。
 
-## 5. 提交产品第一版审核
+## 5. 填写上线配置表
+
+提交第一版审核前，需要把客户端初始化和广告请求所需的关键参数填入上线配置表。
+
+表格地址：[https://shimo.im/sheets/gXqmdQ7yLVfg8Q3o/SKquJ](https://shimo.im/sheets/gXqmdQ7yLVfg8Q3o/SKquJ)
+
+其中 AF / AD Key 建议直接基于 AppsFlyer 或 Adjust 对应 skill 已完成的配置结果回填，减少手工抄错。
+
+必填信息：
+
+| 配置项 | 说明 |
+| --- | --- |
+| AF / AD Key | 按提现类型填写 AppsFlyer Dev Key 或 Adjust App Token / Event Token 等归因参数 |
+| AppLovin SDK Key | 用于 MAX / AppLovin SDK 初始化 |
+| AdMob App ID | AdMob 后台创建 App 后获取 |
+| LevelPlay 广告 ID | 填写 LevelPlay App Key、Placement / Instance 等广告位参数 |
+| MAX 广告 ID | 填写 MAX SDK Key、Ad Unit ID 等广告位参数 |
+
+完成标准：
+
+- 上线配置表已填写当前产品对应参数；
+- 表内 AF / AD、AppLovin、AdMob、LevelPlay、MAX 参数与各后台一致；
+- 客户端或配置负责人已确认可按表接入。
+
+## 6. 提交产品第一版审核
 
 提交首版前确认：
 
@@ -129,6 +157,7 @@
 | 包名与各后台一致 | 待确认 |
 | 归因 SDK 初始化参数已配置 | 待确认 |
 | 广告 SDK 最小单元已配置 | 待确认 |
+| 上线配置表已填写并确认 | 待确认 |
 | 隐私政策 URL 可访问 | 待确认 |
 | 商店素材完整 | 待确认 |
 | 测试设备 / 测试模式已关闭或符合审核要求 | 待确认 |
@@ -138,7 +167,7 @@
 - Google Play 第一版已提交审核；
 - 审核期间不大改后台关键配置，避免包内参数与后台不一致。
 
-## 6. 第一版过审后补齐配置
+## 7. 第一版过审后补齐配置
 
 产品第一版过审后，再补齐完整广告与合规配置。
 
@@ -163,7 +192,7 @@
 - GDPR 配置已完成并通过测试；
 - 激励广告回调、收入上报、归因事件链路正常。
 
-## 7. 触发 AdMob app-ads.txt 审核
+## 8. 触发 AdMob app-ads.txt 审核
 
 1. 确认 app-ads.txt 已部署到指定域名。
 2. 确认文件中包含 AdMob 要求的 publisher 记录。
@@ -175,7 +204,7 @@
 - AdMob app-ads.txt 状态通过；
 - 广告请求不再因 app-ads.txt 问题受限。
 
-## 8. 启动投放
+## 9. 启动投放
 
 启动投放前最后确认：
 
@@ -193,7 +222,7 @@
 
 全部通过后，启动买量投放。
 
-## 9. 总流程速览
+## 10. 总流程速览
 
 ```text
 准备产品信息
@@ -203,6 +232,8 @@
      -> 假提现：AppsFlyer
   -> 创建 MAX / LevelPlay 广告变现最小单元
      -> 假提现 MAX 不配 Prebid 组
+  -> 填写上线配置表
+     -> AF / AD Key、AppLovin SDK Key、AdMob App ID、LevelPlay / MAX 广告 ID
   -> 提交第一版审核
   -> 第一版过审
   -> 补齐剩余广告配置
@@ -212,8 +243,8 @@
   -> 启动投放
 ```
 
-## 10. 简化执行口径
+## 11. 简化执行口径
 
-- 首版审核前：只做“产品实体 + 归因基础 + 广告最小单元”。
+- 首版审核前：只做“产品实体 + 归因基础 + 广告最小单元 + 上线配置表”。
 - 首版过审后：再补齐“完整广告策略 + GDPR + app-ads.txt 审核”。
 - 启动投放前：必须确认商店、归因、广告、GDPR、app-ads.txt、事件数据全部闭环。
